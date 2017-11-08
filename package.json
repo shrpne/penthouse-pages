@@ -1,0 +1,29 @@
+{
+  "name": "gulp-penthouse",
+  "version": "0.1.0",
+  "description": "gulp plugin for penthouse",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shrpne/gulp-penthouse.git"
+  },
+  "keywords": [
+    "gulp",
+    "penthouse",
+    "critical"
+  ],
+  "author": "shrpne",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shrpne/gulp-penthouse/issues"
+  },
+  "homepage": "https://github.com/shrpne/gulp-penthouse#readme",
+  "dependencies": {
+    "clean-css": "^4.1.9",
+    "gulp-util": "^3.0.8",
+    "penthouse": "^1.1.0"
+  }
+}
