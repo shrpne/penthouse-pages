@@ -2,11 +2,12 @@
 Plugin process array of pages through <a href="http://www.npmjs.org/package/penthouse">Penthouse</a> which extracts <a href="https://addyosmani.com/blog/detecting-critical-above-the-fold-css-with-paul-kinlan-video/">critical path css</a> to increase page speed rendering
 
 
-Installation:
+### Install
 ```
 npm install penthouse-pages --save-dev
 ```
 
+### Usage
 Can be used with gulp or separately
 ```js
 let gulp = require('gulp');
@@ -35,3 +36,7 @@ gulp.task('critical-css', ['less'], () => {
 ```
 
 This task will process `example.com/`, `example.com/about`, `example.com/about/contacts` pages and generate `./dest/index.css`,  `./dest/about.css`, `./dest/about-contacts.css` files
+
+
+### Licence
+MIT © [shrpne](mailto:shrpne@gmail.com)
