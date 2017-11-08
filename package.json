@@ -3,8 +3,8 @@
   "version": "0.1.2",
   "description": "process multiple pages with penthouse",
   "main": "index.js",
-  "engines" : {
-    "node" : ">=7.6.0"
+  "engines": {
+    "node": ">=7.6.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -26,8 +26,8 @@
   },
   "homepage": "https://github.com/shrpne/penthouse-pages#readme",
   "dependencies": {
-    "clean-css": "^4.1.9",
-    "gulp-util": "^3.0.8",
-    "penthouse": "^1.1.0"
+    "clean-css": "~4.1.9",
+    "gulp-util": "~3.0.8",
+    "penthouse": "~1.1.0"
   }
 }
