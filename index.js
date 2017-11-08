@@ -1,14 +1,17 @@
 'use strict';
 
 const fs = require('fs');
+const path = require('path');
 const gutil = require('gulp-util');
 const cleanCss = require('clean-css');
 const penthouse = require('penthouse');
 
 /**
  * Generate multiple critical css files for given pages array
- * @param {Object} options - pages options merged with penthouse options
- * @param {Array} options.pages - page urls
+ * @param {Object} options - plugin options merged with penthouse options
+ * @param {Object[]|String[]} options.pages - array of pages, each page can be a string or an objects
+ * @param {String} options.pages[].name - page name, used for dest filename
+ * @param {String} options.pages[].url - page url
  * @param {String} options.baseUrl - base url common for all pages
  * @param {String} options.dest - destination directory
  */
@@ -24,16 +27,29 @@ module.exports = (options) => {
 
     return new Promise(async (resolve) => {
         for (let i = 0; i < options.pages.length; i++) {
-            console.log(i);
             let page = options.pages[i];
+            // convert page string into object
+            if (typeof page === 'string') {
+                page = {
+                    name: page,
+                    url: page,
+                }
+            }
+            // replace "/", e.g. "about/contacts" -> "about-contacts"
+            page.name = page.name.replace('/', '-');
+            // add css extension, if no one specified, .e.g. "about-contacts" -> "about-contacts.css"
+            if (path.extname(page.name) === '') {
+                page.name = page.name + '.css';
+            }
+
             await penthouse(Object.assign({
-                url: options.baseUrl + page,
+                url: options.baseUrl + page.url,
             }, options))
                 .then((criticalCss) => {
                     let output = new cleanCss().minify(criticalCss);
-                    console.log('success', paths.dest.css + '/critical/' + page.name + '.css');
-                    fs.writeFile(options.dest + page.name + '.css', output.styles, () => {
-                        gutil.log('penthouse: ' + options.dest + page.name + '.css successfully generated')
+                    let filePath = path.join(options.dest, page.name);
+                    fs.writeFile(filePath, output.styles, () => {
+                        gutil.log('penthouse: ' + filePath + ' successfully generated');
                     });
                 })
                 .catch((err) => {
