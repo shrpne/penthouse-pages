@@ -1,26 +1,30 @@
 {
-  "name": "gulp-penthouse",
-  "version": "0.1.0",
-  "description": "gulp plugin for penthouse",
+  "name": "penthouse-pages",
+  "version": "0.1.1",
+  "description": "process multiple pages with penthouse",
   "main": "index.js",
+  "engines" : {
+    "node" : ">=7.6.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shrpne/gulp-penthouse.git"
+    "url": "git+https://github.com/shrpne/penthouse-pages.git"
   },
   "keywords": [
-    "gulp",
     "penthouse",
-    "critical"
+    "critical",
+    "pages",
+    "multiple"
   ],
   "author": "shrpne",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shrpne/gulp-penthouse/issues"
+    "url": "https://github.com/shrpne/penthouse-pages/issues"
   },
-  "homepage": "https://github.com/shrpne/gulp-penthouse#readme",
+  "homepage": "https://github.com/shrpne/penthouse-pages#readme",
   "dependencies": {
     "clean-css": "^4.1.9",
     "gulp-util": "^3.0.8",
