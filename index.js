@@ -19,13 +19,12 @@ const PLUGIN_NAME = 'penthouse-pages';
  * @param {String} options.dest - destination directory
  */
 module.exports = (options) => {
-    if (!options) {
-        options = {
-            pages: [],
-            baseUrl: '',
-            dest: '',
-        };
-    }
+    options = Object.assign({
+        pages: [],
+        baseUrl: '',
+        dest: '',
+        cleanCssOptions: {},
+    }, options);
 
 
     return new Promise(async (resolve) => {
@@ -49,10 +48,10 @@ module.exports = (options) => {
                 url: options.baseUrl + page.url,
             }, options))
                 .then((criticalCss) => {
-                    let output = new cleanCss().minify(criticalCss);
+                    let output = new cleanCss(options.cleanCssOptions).minify(criticalCss);
                     let filePath = path.join(options.dest, page.name);
                     fs.writeFile(filePath, output.styles, () => {
-                        gutil.log(PLUGIN_NAME + ':', chalk.green('✔ ') + page.name + chalk.gray(` successfully extracted from ${options.baseUrl + page.url}`));
+                        gutil.log(PLUGIN_NAME + ':', chalk.green('✔ ') + page.name + chalk.gray(` from ${options.baseUrl + page.url}`));
                     });
                 })
                 .catch((err) => {
