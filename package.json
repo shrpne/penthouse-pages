@@ -9,6 +9,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "index.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/shrpne/penthouse-pages.git"
@@ -26,6 +29,7 @@
   },
   "homepage": "https://github.com/shrpne/penthouse-pages#readme",
   "dependencies": {
+    "chalk": "~2.3.0",
     "clean-css": "~4.1.9",
     "gulp-util": "~3.0.8",
     "penthouse": "~1.1.0"

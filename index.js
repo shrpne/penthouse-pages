@@ -3,8 +3,11 @@
 const fs = require('fs');
 const path = require('path');
 const gutil = require('gulp-util');
+const chalk = require('chalk');
 const cleanCss = require('clean-css');
 const penthouse = require('penthouse');
+
+const PLUGIN_NAME = 'penthouse-pages';
 
 /**
  * Generate multiple critical css files for given pages array
@@ -49,7 +52,7 @@ module.exports = (options) => {
                     let output = new cleanCss().minify(criticalCss);
                     let filePath = path.join(options.dest, page.name);
                     fs.writeFile(filePath, output.styles, () => {
-                        gutil.log('penthouse: ' + filePath + ' successfully generated');
+                        gutil.log(PLUGIN_NAME + ':', chalk.green('✔ ') + page.name + chalk.gray(` successfully extracted from ${options.baseUrl + page.url}`));
                     });
                 })
                 .catch((err) => {
