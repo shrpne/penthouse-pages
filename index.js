@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const mkdirp = require('mkdirp');
 const gutil = require('gulp-util');
 const chalk = require('chalk');
 const cleanCss = require('clean-css');
@@ -50,8 +51,13 @@ module.exports = (options) => {
                 .then((criticalCss) => {
                     let output = new cleanCss(options.cleanCssOptions).minify(criticalCss);
                     let filePath = path.join(options.dest, page.name);
-                    fs.writeFile(filePath, output.styles, () => {
-                        gutil.log(PLUGIN_NAME + ':', chalk.green('✔ ') + page.name + chalk.gray(` from ${options.baseUrl + page.url}`));
+                    mkdirp(options.dest, (err) => {
+                        if (err) {
+                            throw err;
+                        }
+                        fs.writeFile(filePath, output.styles, () => {
+                            gutil.log(PLUGIN_NAME + ':', chalk.green('✔ ') + page.name + chalk.gray(` from ${options.baseUrl + page.url}`));
+                        });
                     });
                 })
                 .catch((err) => {
