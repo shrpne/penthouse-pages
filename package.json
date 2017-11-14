@@ -1,6 +1,6 @@
 {
   "name": "penthouse-pages",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "process multiple pages with penthouse",
   "main": "index.js",
   "engines": {
