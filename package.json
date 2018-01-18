@@ -31,6 +31,7 @@
   "dependencies": {
     "chalk": "~2.3.0",
     "clean-css": "~4.1.9",
+    "denodeify": "^1.2.1",
     "gulp-util": "~3.0.8",
     "mkdirp": "^0.5.1",
     "penthouse": "~1.1.0"
