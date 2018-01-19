@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const gutil = require('gulp-util');
+const log = require('fancy-log');
 const chalk = require('chalk');
 const cleanCss = require('clean-css');
 const penthouse = require('penthouse');
@@ -57,7 +57,7 @@ module.exports = (options) => {
                         .then(() => writeFile(filePath, output.styles))
                 })
                 .then(() => {
-                    gutil.log(PLUGIN_NAME + ':', chalk.green('✔ ') + page.name + chalk.gray(` from ${options.baseUrl + page.url}`));
+                    log(PLUGIN_NAME + ':', chalk.green('✔ ') + page.name + chalk.gray(` from ${options.baseUrl + page.url}`));
                 })
                 .catch((err) => {
                     throw err;
