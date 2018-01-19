@@ -2,11 +2,13 @@
 
 const fs = require('fs');
 const path = require('path');
-const mkdirp = require('mkdirp');
 const gutil = require('gulp-util');
 const chalk = require('chalk');
 const cleanCss = require('clean-css');
 const penthouse = require('penthouse');
+const denodeify = require('denodeify');
+const mkdirp = denodeify(require('mkdirp'));
+const writeFile = denodeify(fs.writeFile);
 
 const PLUGIN_NAME = 'penthouse-pages';
 
@@ -51,14 +53,11 @@ module.exports = (options) => {
                 .then((criticalCss) => {
                     let output = new cleanCss(options.cleanCssOptions).minify(criticalCss);
                     let filePath = path.join(options.dest, page.name);
-                    mkdirp(options.dest, (err) => {
-                        if (err) {
-                            throw err;
-                        }
-                        fs.writeFile(filePath, output.styles, () => {
-                            gutil.log(PLUGIN_NAME + ':', chalk.green('✔ ') + page.name + chalk.gray(` from ${options.baseUrl + page.url}`));
-                        });
-                    });
+                    return mkdirp(options.dest)
+                        .then(() => writeFile(filePath, output.styles))
+                })
+                .then(() => {
+                    gutil.log(PLUGIN_NAME + ':', chalk.green('✔ ') + page.name + chalk.gray(` from ${options.baseUrl + page.url}`));
                 })
                 .catch((err) => {
                     throw err;
